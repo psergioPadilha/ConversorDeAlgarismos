@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ConversorDeAlgarismos.Aplicacao\ConversorDeAlgarismos.Aplicacao.csproj" />
+    <ProjectReference Include="..\ConversorDeAlgarismos.Testes\ConversorDeAlgarismos.Testes.csproj" />
+  </ItemGroup>
+
 </Project>
