@@ -11,7 +11,7 @@ public static class Cabecalho
     public static void CabecalhoPrincipal()
     {
         string instituicao = "ACADEMIA DO PROGRAMADOR!!!";
-        string turma = "TURMA 2024";
+        string turma = "TURMA FULLSTACK 2024";
         string mensagem = "Programa Conversor de Algarismos";
 
         Console.Clear();

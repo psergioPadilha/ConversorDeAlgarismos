@@ -8,21 +8,28 @@ internal class Program
     {
         while (true)
         {
-            string algarismoRomano;
-
             string opcao = Menu.MenuPrincipal();
 
             if (opcao == "1")
-                algarismoRomano = Menu.MenuConverterAlgarismoRomanoEmAlgarismoIndoArabico();
+            {
+                string algarismoRomano = Menu.MenuConverterAlgarismoRomanoEmAlgarismoIndoArabico();
+                if(ServicoAlgarismoRomano.VerificarOpcaoCancelar(algarismoRomano))
+                    break;
+
+                List<string> algarismos = ServicoAlgarismoRomano.ValidarAlgarismoRomano(algarismoRomano);
+
+            }
             if (opcao == "2")
-                algarismoRomano = Menu.MenuConverterAlgarismoIndoArabicoEmAlgarismoRomano();
-            if (Menu.ConfirmarParaSairDoSistema())
-                Environment.Exit(0);
-            else
-                continue;
+            {
+                Console.WriteLine("Opção '2' selecionada!");
+                Console.ReadKey();
+            }
 
-
-            Console.ReadKey();
+            if ((opcao == "S") || (opcao == "s"))
+            {
+                if(Menu.MenuSairDoSistema())
+                    Environment.Exit(0);
+            }
         }
     }
 }
