@@ -13,11 +13,16 @@ internal class Program
             if (opcao == "1")
             {
                 string algarismoRomano = Menu.MenuConverterAlgarismoRomanoEmAlgarismoIndoArabico();
-                if(ServicoAlgarismoRomano.VerificarOpcaoCancelar(algarismoRomano))
-                    break;
+                if (ServicoAlgarismoRomano.VerificarOpcaoCancelar(algarismoRomano))
+                    continue;
 
-                List<string> algarismos = ServicoAlgarismoRomano.ValidarAlgarismoRomano(algarismoRomano);
+                List<string> algarismos = ServicoAlgarismoRomano.ValidarDigitosAlgarismoRomano(algarismoRomano);
 
+                List<int> algarismoNumericos = ServicoAlgarismoRomano.PassarDigitosEmRomanoParaDigitosEmIndoArabicos(algarismos);
+
+                List<int> algarismoNumericosInvertidos = ServicoAlgarismoRomano.InverterPosicoesDosAlgarismos(algarismoNumericos);
+
+                ServicoAlgarismoRomano.GerarAlgarismoIndoArabico(algarismoNumericos);
             }
             if (opcao == "2")
             {
@@ -25,7 +30,7 @@ internal class Program
                 Console.ReadKey();
             }
 
-            if ((opcao == "S") || (opcao == "s"))
+            if ((opcao == "S"))
             {
                 if(Menu.MenuSairDoSistema())
                     Environment.Exit(0);

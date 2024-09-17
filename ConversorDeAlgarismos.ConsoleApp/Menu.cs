@@ -20,7 +20,7 @@ public static class Menu
         Console.WriteLine("Digite 'S' para 'SAIR DO SISTEMA'!");
         Console.WriteLine();
         Console.Write("Opção: ");
-        string opcao = Console.ReadLine();
+        string opcao = Console.ReadLine().ToUpper();
         string opcaoValidada = ServicoAlgarismoRomano.ValidarOpcaoDeEntradaDoMenuPrincipal(opcao);
 
         return opcaoValidada;
@@ -36,10 +36,10 @@ public static class Menu
         Console.WriteLine("Digite 'C' para 'CANCELAR'!");
         Console.WriteLine();
         Console.Write("Opção: ");
-        string opcao = Console.ReadLine();
+        string opcao = Console.ReadLine().ToUpper();
         string opcaoValidada = ServicoAlgarismoRomano.ValidarOpcaoParaSairDoSistema(opcao);
 
-        if ((opcaoValidada == "S") || (opcaoValidada == "s"))
+        if ((opcaoValidada == "S"))
             return true;
         else
             return false;
@@ -55,7 +55,7 @@ public static class Menu
         Console.WriteLine("Digite 'C' para 'CANCELAR'!");
         Console.WriteLine();
         Console.Write("Opção: ");
-        string opcao = Console.ReadLine();
+        string opcao = Console.ReadLine().ToUpper();
         string opcaoValidada = ServicoAlgarismoRomano.ValidarOpcaoParaSairDoSistema(opcao);
 
         return opcaoValidada;
@@ -65,12 +65,12 @@ public static class Menu
     {
         Cabecalho.CabecalhoPrincipal();
 
-        Console.WriteLine("VOCÊ OPTOU POR CONVERTER ALGARISMO ROMANO EM ALGARISMO IND-ARÁBICO!");
+        Console.WriteLine("VOCÊ OPTOU POR CONVERTER ALGARISMO ROMANO EM ALGARISMO INDO-ARÁBICO!");
         Console.WriteLine();
         Console.WriteLine("Digite o 'ALGARISMO ROMANO' ou 'R' para retornar ao menu principal!");
         Console.WriteLine();
         Console.Write("Algarismo: ");
-        string algarismo = Console.ReadLine();
+        string algarismo = Console.ReadLine().ToUpper();
 
         return algarismo;
     }

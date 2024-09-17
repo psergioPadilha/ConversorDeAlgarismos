@@ -20,7 +20,7 @@ public class ServicoAlgarismoRomano
 
     public static string ValidarOpcaoParaSairDoSistema(string opcao)
     {
-        while ((opcao != "S") && (opcao != "s") && (opcao != "C") && (opcao != "c"))
+        while ((opcao != "S") && (opcao != "C"))
         {
             Mensagens.MensagemOpcaoInvalida();
 
@@ -34,15 +34,18 @@ public class ServicoAlgarismoRomano
     {
         bool opcao = false;
 
-        if ((algarismoRomano == "R") || (algarismoRomano == "r"))
+        if ((algarismoRomano == "R"))
             opcao = true!;
 
         return opcao;
     }
 
-    public static List<string> ValidarAlgarismoRomano(string algarismoRomano)
+    public static List<string> ValidarDigitosAlgarismoRomano(string algarismoRomano)
     {
         List<string> listAlgarismosRomanos = new List<string>();
+        int contV = 0;
+        int contL = 0;
+        int contD = 0;
 
         for (int i = 0; i < algarismoRomano.Length; i++)
         {
@@ -51,51 +54,169 @@ public class ServicoAlgarismoRomano
 
         for (int i = 0; i < algarismoRomano.Length; i++)
         {
-            if ((listAlgarismosRomanos[i] != "i") && (listAlgarismosRomanos[i] != "I") &&
-                (listAlgarismosRomanos[i] != "v") && (listAlgarismosRomanos[i] != "V") &&
-                (listAlgarismosRomanos[i] != "x") && (listAlgarismosRomanos[i] != "X") &&
-                (listAlgarismosRomanos[i] != "l") && (listAlgarismosRomanos[i] != "L") &&
-                (listAlgarismosRomanos[i] != "c") && (listAlgarismosRomanos[i] != "C") &&
-                (listAlgarismosRomanos[i] != "d") && (listAlgarismosRomanos[i] != "D") &&
-                (listAlgarismosRomanos[i] != "m") && (listAlgarismosRomanos[i] != "M")
-               )
+            if ((listAlgarismosRomanos[i] != "I") && (listAlgarismosRomanos[i] != "V") &&
+                (listAlgarismosRomanos[i] != "X") && (listAlgarismosRomanos[i] != "L") &&
+                (listAlgarismosRomanos[i] != "C") && (listAlgarismosRomanos[i] != "D") &&
+                (listAlgarismosRomanos[i] != "M"))
             {
                 Mensagens.MensagemDigitoDeAlgarismoInvalido(i, char.Parse(listAlgarismosRomanos[i]));
-                listAlgarismosRomanos[i] = Console.ReadLine();
+                listAlgarismosRomanos[i] = Console.ReadLine().ToUpper();
 
                 i -= 1;
+
+                break;
+            }
+
+            if ((listAlgarismosRomanos[i] == "V") && (contV == 1))
+            {
+                Mensagens.MensagemDigitoDeAlgarismoInvalido(i, char.Parse(listAlgarismosRomanos[i]));
+                listAlgarismosRomanos[i] = Console.ReadLine().ToUpper();
+
+                i -= 1;
+
+                break;
+            }
+            else
+                contV = 1;
+
+            if ((listAlgarismosRomanos[i] == "L") && (contL == 1))
+            {
+                Mensagens.MensagemDigitoDeAlgarismoInvalido(i, char.Parse(listAlgarismosRomanos[i]));
+                listAlgarismosRomanos[i] = Console.ReadLine().ToUpper();
+
+                i -= 1;
+
+                break;
+            }
+            else
+                contL = 1;
+
+            if ((listAlgarismosRomanos[i] == "D") && (contD == 1))
+            {
+                Mensagens.MensagemDigitoDeAlgarismoInvalido(i, char.Parse(listAlgarismosRomanos[i]));
+                listAlgarismosRomanos[i] = Console.ReadLine().ToUpper();
+
+                i -= 1;
+
+                break;
+            }
+            else
+                contD = 1;
+
+            if (i > 2)
+            {
+                if ((listAlgarismosRomanos[i] == listAlgarismosRomanos[i - 3]) && 
+                    (listAlgarismosRomanos[i] == listAlgarismosRomanos[i - 2]) &&
+                    (listAlgarismosRomanos[i] == listAlgarismosRomanos[i - 1]))
+                {
+                    Mensagens.MensagemDigitoDeAlgarismoInvalido(i, char.Parse(listAlgarismosRomanos[i]));
+                    listAlgarismosRomanos[i] = Console.ReadLine().ToUpper();
+
+                    i -= 1;
+                }
             }
         }
 
         return listAlgarismosRomanos;
     }
 
-    public static void PassarDigitosEmRomanoParaDigitosEmIndoArabicos(List<string> listAlgarismoRomano)
+    public static List<int> PassarDigitosEmRomanoParaDigitosEmIndoArabicos(List<string> listAlgarismoRomano)
     {
-        List<int> listAlgarismosIndoArabicos = new List<int>();
+        List<int> listNumericos = new List<int>();
 
         for (int i = 0; i < listAlgarismoRomano.Count; i++)
         {
             if ((listAlgarismoRomano[i] == "i") || (listAlgarismoRomano[i] == "I"))
-                listAlgarismosIndoArabicos.Add(1);
+                listNumericos.Add(1);
 
             if ((listAlgarismoRomano[i] == "v") || (listAlgarismoRomano[i] == "V"))
-                listAlgarismosIndoArabicos.Add(5);
+                listNumericos.Add(5);
 
             if ((listAlgarismoRomano[i] == "x") || (listAlgarismoRomano[i] == "X"))
-                listAlgarismosIndoArabicos.Add(10);
+                listNumericos.Add(10);
 
             if ((listAlgarismoRomano[i] == "l") || (listAlgarismoRomano[i] == "L"))
-                listAlgarismosIndoArabicos.Add(50);
+                listNumericos.Add(50);
 
             if ((listAlgarismoRomano[i] == "c") || (listAlgarismoRomano[i] == "C"))
-                listAlgarismosIndoArabicos.Add(100);
+                listNumericos.Add(100);
 
             if ((listAlgarismoRomano[i] == "d") || (listAlgarismoRomano[i] == "D"))
-                listAlgarismosIndoArabicos.Add(500);
+                listNumericos.Add(500);
 
             if ((listAlgarismoRomano[i] == "m") || (listAlgarismoRomano[i] == "M"))
-                listAlgarismosIndoArabicos.Add(1000);
+                listNumericos.Add(1000);
         }
+
+        return listNumericos;
+    }
+
+
+    public static List<int> InverterPosicoesDosAlgarismos(List<int> listNumericos)
+    {
+        List<int> listNumericosInvertidos = new List<int>();
+
+        int numeroDeElementos = listNumericos.Count();
+
+        for (int i = 0; i < listNumericos.Count; i++)
+        {
+            listNumericosInvertidos.Add(listNumericos[numeroDeElementos - 1]);
+
+            numeroDeElementos -= 1;
+        }
+
+        return listNumericosInvertidos;
+    }
+
+    public static void GerarAlgarismoIndoArabico(List<int> listNumericos)
+    {
+        int algarismoIndoArabico = 0;
+
+        for (int i = 0; i < listNumericos.Count; i++)
+        {
+            if (i == 0)
+                algarismoIndoArabico = listNumericos[i];
+
+            if (i == 1)
+            {
+                if (listNumericos[i] <= listNumericos[i - 1])
+                    algarismoIndoArabico = listNumericos[i] + listNumericos[i - 1];
+                else
+                {
+                    if ((listNumericos[i] == 5) && (listNumericos[i - 1] == 1))
+                        algarismoIndoArabico = listNumericos[i] - listNumericos[i - 1];
+
+                    if ((listNumericos[i] == 10) && (listNumericos[i - 1] == 1))
+                        algarismoIndoArabico = listNumericos[i] - listNumericos[i - 1];
+
+                    if ((listNumericos[i] == 50) && (listNumericos[i - 1] == 10))
+                        algarismoIndoArabico = listNumericos[i] - listNumericos[i - 1];
+
+                    if ((listNumericos[i] == 100) && (listNumericos[i - 1] == 10))
+                        algarismoIndoArabico = listNumericos[i] - listNumericos[i - 1];
+
+                    if ((listNumericos[i] == 500) && (listNumericos[i - 1] == 100))
+                        algarismoIndoArabico = listNumericos[i] - listNumericos[i - 1];
+
+                    if ((listNumericos[i] == 1000) && (listNumericos[i - 1] == 100))
+                        algarismoIndoArabico = listNumericos[i] - listNumericos[i - 1];
+                }
+            }
+
+            if (i == 2)
+            {
+                if ((listNumericos[i - 2] >= listNumericos[i - 1]) && (listNumericos[i - 1] >= (listNumericos[i])))
+                    algarismoIndoArabico = listNumericos[i - 2] + listNumericos[i - 1] + listNumericos[i];
+
+                if ((listNumericos[i - 2] >= listNumericos[i - 1]) && (listNumericos[i - 1] < (listNumericos[i])))
+                    algarismoIndoArabico = listNumericos[i - 2] + (listNumericos[i] - listNumericos[i -1]);
+
+                if ((listNumericos[i - 2] < listNumericos[i - 1]) && (listNumericos[i - 1] > (listNumericos[i])))
+                    algarismoIndoArabico = (listNumericos[i - 1] - (listNumericos[i - 2]) + listNumericos[i]);
+            }
+        }
+
+        Console.WriteLine("Algarismo indo-arábico: " + algarismoIndoArabico);
+        Console.ReadKey();
     }
 }
